@@ -110,7 +110,7 @@ class WX_PAY_LIB:
         _payload['signType'] = 'SHA1'
         return _payload
 
-    def _valid_sign(ts, noncestr, openid, subscribe):
+    def valid_sign(self, ts, noncestr, openid, subscribe):
         _payload = {}
         _payload['appId'] = str(self.__appid)
         _payload['appkey'] = str(self.__pay_sign_key)
@@ -180,5 +180,6 @@ if __name__ == "__main__":
     _total_fee = 1
     _package = t.build_package(_body, _order_id, _ip, _notify_url, _total_fee);
     _sign  = t.sign(_package, _ts, _nonestr)
+    _vsign = t.valid_sign(d['TimeStamp'], d['NonceStr'], d['OpenId'], d['IsSubscribe'])
 
-    print _package, _sign
+    print _package, _sign, _vsign
